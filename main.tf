@@ -7,10 +7,11 @@ terraform {
       name = "tf-mini-infra"
     }
   }
+  required_version = ">= 1.0"
+
   required_providers {
     aws = ">= 3.46.0"
   }
-  required_version = ">= 1.0"
 }
 
 provider "aws" {
@@ -23,7 +24,7 @@ module "vpc_with_sg" {
   public_subnets = ["192.168.0.0/24"]
 }
 
-module "instance" {
+module "ec2_instance" {
   source     = "./ec2"
   subnet_id  = module.vpc_with_sg.subnet_id
   private_ip = "192.168.0.100"
